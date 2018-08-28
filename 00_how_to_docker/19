@@ -1,4 +1,9 @@
-docker run --name Abathur -v ~/exo19docker:/root -p 3000:3000 -dit python:2-slim
+echo -e 'from flask import Flask\napp = Flask(__name__)\n@app.route("/")\ndef hello():\n\treturn "<h1>Hello World</h1>"\nif __name__ == "__main__":\n\tapp.run(host="0.0.0.0", port="3000")' > ~/main.py && chmod 777 ~/main.py
+
+docker-machine ssh Char mkdir /home/exo19
+docker-machine scp ~/main.py Char:/home/exo19
+
+docker run --name Abathur -v /home/exo19:/root -p 3000:3000 -dit python:2-slim
 docker exec Abathur pip install flask
 
-echo -e 'from flask import Flask\napp = Flask(__name__)\n@app.route("/")\ndef hello():\n\treturn "<h1>Hello World</h1>"\nif __name__ == "__main__":\n\tapp.run(host="0.0.0.0", port=3000)' > ~/exo19docker/main.py && chmod 777 ~/exo19docker/main.py
+docker exec Abathur python /root/main.py
