@@ -8,5 +8,5 @@ RUN rake db:migrate && rake db:seed
 CMD ["rails", "server"]
 
 #docker build -t ft-rails:on-build .
-#docker build -t rubyapp -f test_Dockerfile .
+#docker build -t rubyapp -f testDockerfile .
 #docker run -p 3000:3000 --name ruby-test rubyapp
