@@ -2,7 +2,7 @@
 
 set -o xtrace
 
-gitlab-rake cache:clear 
+apt-get install -y git
 opt/gitlab/embedded/bin/runsvdir-start &
-gitlab-ctl reconfigure
+EXTERNAL_URL="localhost" && gitlab-ctl reconfigure
 tail -f /dev/null
